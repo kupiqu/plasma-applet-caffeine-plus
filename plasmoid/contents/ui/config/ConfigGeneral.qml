@@ -52,7 +52,7 @@ Item {
 
         CheckBox {
             id: enableFullscreen
-            text: i18n('Enable When a fullscreen application is running')
+            text: i18n('Inhibit power saving under fullscreen')
             Layout.columnSpan: 2
         }
 

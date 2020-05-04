@@ -424,7 +424,7 @@ void CaffeinePlus::inhibitFullscreen(WId id)
 	if (getInhibitionIndex(appName) >= 0) needInhibit = false;
 
     if ( m_enableFullscreen && needInhibit )
-    	addInhibition(appName, QString("inhibit by caffeine plus for fullscreen"));
+    	addInhibition(appName, QString("power saving inhibited by caffeine plus (fullscreen app)"));
     else if (!isFullScreen)
     	releaseInhibition(appName);
 }
@@ -437,7 +437,7 @@ bool CaffeinePlus::inUserApps(WId id)
 
 	WId gid = info.groupLeader();
 	KWindowInfo ginfo(gid, NET::WMState|NET::WMName, NET::WM2DesktopFileName|NET::WM2WindowClass|NET::WM2WindowRole);
-    for ( const auto& item : m_userApps  )
+    for ( const auto& item : m_userApps )
     {
     	// Get the name of the file without the extension
     	QString file_name = QFileInfo(item).completeBaseName();
@@ -446,7 +446,8 @@ bool CaffeinePlus::inUserApps(WId id)
     	QString exec = item_info.value("exec").toString();
 
     	if ( applicationName != "" ) {
-    		if ( file_name.indexOf(applicationName, 0) >= 0 || ( ginfo.name() != "" && applicationName.indexOf(ginfo.name(), 0) >= 0 ) ) {
+    		// if ( file_name.indexOf(applicationName, 0) >= 0 ) {
+            if ( ginfo.name() != "" && applicationName.indexOf(ginfo.name(), 0) >= 0 ) {
     			isInUserApps = true;
     			break;
     		}
@@ -476,7 +477,7 @@ void CaffeinePlus::inhibitUserApps(WId id)
 	}
 
     if ( inUserApps(id) )
-    	addInhibition(appName, QString("inhibit by caffeine plus for userApps"));
+    	addInhibition(appName, QString("power saving inhibited by caffeine plus (user app)"));
 }
 
 QString CaffeinePlus::getNameByID(const QString &id, bool inhibitType) {
@@ -556,9 +557,9 @@ QVariantMap CaffeinePlus::checkProcessIsInhibited(const QString &id) {
 		inhibitedSys = true;
 
     return QVariantMap{
-        {QStringLiteral("inhibitedUserApps"), inhibitedUserApps},
-        {QStringLiteral("inhibitedFullScreen"), inhibitedFullScreen},
-        {QStringLiteral("inhibitedSys"), inhibitedSys}
+        {QStringLiteral("inhibited_user_app"), inhibitedUserApps},
+        {QStringLiteral("inhibited_fullscreen"), inhibitedFullScreen},
+        {QStringLiteral("inhibited_system"), inhibitedSys}
     };
 }
 

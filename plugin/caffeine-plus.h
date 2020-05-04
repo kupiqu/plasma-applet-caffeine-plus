@@ -14,8 +14,8 @@ class QDBusServiceWatcher;
 using InhibitionInfo = QPair<QString, QString>;
 using InhibitionInfoExtra = QPair<QString, QString>;
 
-#define SUFFIX_USER_APP "|userApps"
-#define SUFFIX_FULL_SCREEN "|fullScreen"
+#define SUFFIX_USER_APP "|caffeine+|user_app"
+#define SUFFIX_FULL_SCREEN "|caffeine+|fullscreen"
 
 class CaffeinePlus : public QObject
 {
@@ -77,7 +77,7 @@ private:
 	QList<InhibitionInfo> m_apps; // for caffeine, first item is app_name, second is cookie
 	QList<InhibitionInfoExtra> m_apps_extra; // for caffeine, first item is app_name, second is app info
 
-	QStringList m_userApps; // for caffeine, custom apps from user configueration
+	QStringList m_userApps; // for caffeine, custom apps from user configuration
 	bool m_enableFullscreen; // for caffeine, determine if enable fullscreen inhibition
 	bool m_enableDebug; // for caffeine, determine if enable debug
 	QString m_debug_log;

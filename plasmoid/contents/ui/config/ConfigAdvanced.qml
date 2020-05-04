@@ -55,7 +55,7 @@ Item {
 
     Rectangle {
 	    id: container
-	    width: 300; height: 400
+	    width: 400; height: 400
 
 	    ListModel {
 	        id: appsModel
@@ -86,7 +86,7 @@ Item {
 	        Item {
 	//! [0]
 	            id: delegateItem
-	            width: listView.width; height: 20
+	            width: listView.width; height: 22
 	            clip: true
 
 	            Item {
@@ -95,14 +95,14 @@ Item {
 	                    PlasmaCore.IconItem {
 	                    	source: iconName
 	                    	width:24
-	                    	height: 20
+	                    	height: 22
 	                    }
 
 	                    Text {
 	                        text: name
 	                        font.pixelSize: 14
 	                        width: 200
-	                        height: 20
+	                        height: 22
 	                    }
 
 	                    Text {
@@ -112,8 +112,8 @@ Item {
 
 	                    PlasmaComponents.Button {
 	                        text: "Remove"
-	                        height: 20
-	                    	width:64
+	                        height: 22
+	                    	width:120
 	                        MouseArea { anchors.fill:parent; onClicked: advancedConfig.removeApp(index) }
 	                    }
 	                }
@@ -175,18 +175,27 @@ Item {
 			            bottom: parent.top
 			        }
 		            PlasmaComponents.Button {
-		                text: i18n("Add app need inhibit screensaver")
+		                text: i18n("Add app to the list of power saving inhibitors")
 		                onClicked: caffeinePlus.addLauncher()
 		            }
 		        }
-		        
+
 		        Row {
 		            id: buttonRow
+		            anchors {
+                        bottom: parent.bottom
+                    }
 		            PlasmaComponents.CheckBox {
 			            id: enableDebug
-			            text: i18n('Enable debug (log file will be placed in your home, named caffeine-plugs-debug.log)')
-			            Layout.columnSpan: 2
+			            // text: i18n('Enable debug: $HOME/caffeine-plugs-debug.log')
+			            // Layout.columnSpan: 2
 			        }
+                    Text {
+                        anchors {
+                            bottom: parent.bottom
+                        }
+                        text: i18n('Enable debug: $HOME/caffeine-plugs-debug.log')
+                    }
 		        }
 		  	}
         }

@@ -56,8 +56,16 @@ Item {
         MouseArea {
             id: mouseArea
             anchors.fill: parent
+            acceptedButtons: Qt.LeftButton | Qt.MiddleButton
             onClicked: {
-            	plasmoid.expanded = !plasmoid.expanded
+                if ( mouse.button == Qt.LeftButton ){
+                    plasmoid.configuration.enableRestore = !plasmoid.configuration.enableRestore
+                    caffeinePlus.toggle(plasmoid.configuration.enableRestore)
+                    plasmoid.expanded = false
+                }
+                else
+                    if( mouse.button == Qt.MiddleButton)
+                        plasmoid.expanded = !plasmoid.expanded
             }
             hoverEnabled: true
         }
@@ -135,9 +143,9 @@ Item {
 
 	    function toggle(flag) {
 	        if (flag) {
-	            caffeinePlus.addInhibition("user", i18n("inhibit by caffeine plus"))
+              caffeinePlus.addInhibition("caffeine+", i18n("global power saving inhibition"))
 	        } else {
-	            caffeinePlus.releaseInhibition("user")
+              caffeinePlus.releaseInhibition("caffeine+")
 	        }
 	    }
     }

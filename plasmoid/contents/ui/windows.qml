@@ -39,7 +39,7 @@ Item {
     Plasmoid.switchWidth: units.gridUnit * 11
     Plasmoid.switchHeight: units.gridUnit * 11
 
-    Plasmoid.toolTipSubText: i18n("Show list of opened windows")
+    // Plasmoid.toolTipSubText: i18n("Show list of opened windows")
 
     property int itemHeight: Math.ceil((Math.max(theme.mSize(theme.defaultFont).height, units.iconSizes.small)
         + Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
@@ -198,8 +198,8 @@ Item {
                     PlasmaComponents.Label {
                         id: label
 	                    function check(model) {
-	                    	var result = caffeinePlus.checkProcessIsInhibited(model["LegacyWinIdList"])
-	                    	if (result["inhibitedFullScreen"] || result["inhibitedUserApps"] || result["inhibitedSys"]) {
+	                    	var result = caffeinePlus.checkProcessIsInhibited(model["legacy_win_Id_list"])
+	                    	if (result["inhibited_fullscreen"] || result["inhibited_user_app"] || result["inhibited_system"]) {
 	                    		parent.children[0].visible = true
 	                    		label.color = "green"
 	                    	} else {
@@ -241,9 +241,9 @@ Item {
         }
     }
 
-        PlasmaComponents.CheckBox {
+    PlasmaComponents.CheckBox {
         	id: enableRestore
-            text: i18n("Inhibit suspend globally")
+            text: i18n("Inhibit power saving globally")
             onCheckedChanged: {
             	plasmoid.configuration.enableRestore = checked
 			}
