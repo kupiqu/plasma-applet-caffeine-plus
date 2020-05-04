@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Caffeine Plus
-Comment=Disable screensaver and auto suspend
+Comment=Inhibit power saving
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=caffeine-plus
